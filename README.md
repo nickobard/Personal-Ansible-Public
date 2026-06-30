@@ -10,7 +10,11 @@ Fast less secure way:
 More secure way (inspect the code):
 
 ```shell
-curl -fsSL https://raw.githubusercontent.com/nickobard/Personal-Ansible-Public/main/<script-name>.sh | bash
+curl -fsSLO https://raw.githubusercontent.com/nickobard/Personal-Ansible-Public/main/<script-name>.sh | bash
+
+chmod +x <scrit-name>.sh
+
+./<script-name>.sh
 ```
 
 Client set up:
