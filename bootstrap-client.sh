@@ -24,6 +24,9 @@ INFRA_DIR="$ANSIBLE_DIR/infra"
 
 mkdir -p "$ANSIBLE_DIR"
 
+sudo dnf install -y gh
+gh auth login
+
 if [ ! -d "$INFRA_DIR/.git" ]; then
     git clone "https://github.com/nickobard/Personal-Ansible-Private.git" "$INFRA_DIR"
 else
