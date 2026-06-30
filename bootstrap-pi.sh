@@ -1,24 +1,15 @@
 #!/usr/bin/env bash
-set -euox pipefail
+set -euxo pipefail
 
-
-# pipx is per application python environment. It allows distribution of end tools - not libraries, but tools, ready to use in CLI.
-sudo dnf install -y git pipx gh
+sudo apt update
+sudo apt install -y git pipx gh python3-venv
 
 pipx ensurepath || true
 export PATH="$HOME/.local/bin:$PATH"
 
-# Install Ansible tools isolated from system Python
 pipx install --include-deps ansible || pipx upgrade ansible
-pipx install --include-deps ansible-lint || pipx upgrade ansible-lint
-
-# Make tools available in this script immediately
-export PATH="$HOME/.local/bin:$PATH"
 
 ansible --version
-ansible-lint --version
-
-# Repository with ansible set up
 
 ANSIBLE_DIR="$HOME/.local/share/ansible"
 INFRA_DIR="$ANSIBLE_DIR/infra"
@@ -26,9 +17,8 @@ PRIVATE_REPO="nickobard/Personal-Ansible-Private"
 
 mkdir -p "$ANSIBLE_DIR"
 
-
 if ! gh auth status >/dev/null 2>&1; then
-    gh auth login
+    gh auth login --web
 fi
 
 gh auth setup-git
@@ -40,3 +30,6 @@ else
 fi
 
 cd "$INFRA_DIR"
+
+# ansible-galaxy collection install -r requirements.yml
+# ansible-playbook playbooks/pi.yml
