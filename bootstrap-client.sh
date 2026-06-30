@@ -28,9 +28,9 @@ mkdir -p "$ANSIBLE_DIR"
 
 if ! gh auth status >/dev/null 2>&1; then
     gh auth login
-    gh auth setup-git
 fi
 
+gh auth setup-git
 
 if [ ! -d "$INFRA_DIR/.git" ]; then
     gh repo clone "$PRIVATE_REPO" "$INFRA_DIR"
