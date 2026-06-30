@@ -3,7 +3,7 @@ set -euox pipefail
 
 
 # pipx is per application python environment. It allows distribution of end tools - not libraries, but tools, ready to use in CLI.
-sudo dnf install -y git python3-pip pipx
+sudo dnf install -y git python3-pip pipx gh
 
 pipx ensurepath
 
@@ -21,14 +21,19 @@ ansible-lint --version
 
 ANSIBLE_DIR="$HOME/.local/share/ansible"
 INFRA_DIR="$ANSIBLE_DIR/infra"
+PRIVATE_REPO="nickobard/Personal-Ansible-Private"
 
 mkdir -p "$ANSIBLE_DIR"
 
-sudo dnf install -y gh
-gh auth login
+
+if ! gh auth status >/dev/null 2>&1; then
+    gh auth login
+    gh auth setup-git
+fi
+
 
 if [ ! -d "$INFRA_DIR/.git" ]; then
-    git clone "https://github.com/nickobard/Personal-Ansible-Private.git" "$INFRA_DIR"
+    gh repo clone "$PRIVATE_REPO" "$INFRA_DIR"
 else
     git -C "$INFRA_DIR" pull --ff-only
 fi
