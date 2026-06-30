@@ -3,13 +3,14 @@ set -euox pipefail
 
 
 # pipx is per application python environment. It allows distribution of end tools - not libraries, but tools, ready to use in CLI.
-sudo dnf install -y git python3-pip pipx gh
+sudo dnf install -y git pipx gh
 
-pipx ensurepath
+pipx ensurepath || true
+export PATH="$HOME/.local/bin:$PATH"
 
 # Install Ansible tools isolated from system Python
-pipx install --include-deps ansible
-pipx install --include-deps ansible-lint
+pipx install --include-deps ansible || pipx upgrade ansible
+pipx install --include-deps ansible-lint || pipx upgrade ansible-lint
 
 # Make tools available in this script immediately
 export PATH="$HOME/.local/bin:$PATH"
