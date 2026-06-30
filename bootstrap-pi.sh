@@ -31,5 +31,5 @@ fi
 
 cd "$INFRA_DIR"
 
-# ansible-galaxy collection install -r requirements.yml
-# ansible-playbook playbooks/pi.yml
+ansible-galaxy collection install -r requirements.yml
+ansible-playbook playbooks/pi.yml

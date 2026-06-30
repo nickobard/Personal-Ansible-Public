@@ -41,6 +41,6 @@ fi
 
 cd "$INFRA_DIR"
 
-# ansible-galaxy collection install -r requirements.yml
-# ansible-lint
-# ansible-playbook playbooks/client.yml
+ansible-galaxy collection install -r requirements.yml
+ansible-lint
+ansible-playbook playbooks/work_laptop.yml
