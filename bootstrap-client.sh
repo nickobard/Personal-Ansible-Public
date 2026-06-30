@@ -19,13 +19,13 @@ ansible-lint --version
 
 # Repository with ansible set up
 
-ANSIBLE_DIR="$HOME/.ansible"
+ANSIBLE_DIR="$HOME/.local/share/ansible"
 INFRA_DIR="$ANSIBLE_DIR/infra"
 
 mkdir -p "$ANSIBLE_DIR"
 
 if [ ! -d "$INFRA_DIR/.git" ]; then
-    git clone "https://github.com/nickobard/Personal-Ansible-Public.git" "$INFRA_DIR"
+    git clone "https://github.com/nickobard/Personal-Ansible-Private.git" "$INFRA_DIR"
 else
     git -C "$INFRA_DIR" pull --ff-only
 fi
